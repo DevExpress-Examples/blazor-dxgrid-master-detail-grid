@@ -1,0 +1,41 @@
+﻿@page "/"
+@using Microsoft.EntityFrameworkCore
+@using MasterDetail.Models
+@inject IDbContextFactory<NorthwindContext> NorthwindContextFactory
+@implements IDisposable
+
+<DxGrid @ref="Grid" Data="MasterGridData" AutoCollapseDetailRow="true">
+    <Columns>
+        <DxGridDataColumn FieldName="ContactName" SortIndex="0" />
+        <DxGridDataColumn FieldName="CompanyName" />
+        <DxGridDataColumn FieldName="Country" />
+        <DxGridDataColumn FieldName="City" />
+    </Columns>
+    <DetailRowTemplate>
+        <Grid_MasterDetail_NestedGrid_DetailContent Customer="(Customer)context.DataItem" Invoices="@Invoices" />
+    </DetailRowTemplate>
+</DxGrid>
+
+@code {   
+    IGrid Grid { get; set; }
+    NorthwindContext Northwind { get; set; }
+    IEnumerable<Customer> MasterGridData { get; set; }
+    IEnumerable<Invoice> Invoices { get; set; }
+    TaskCompletionSource<bool> DataLoadedTcs { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+    protected override async Task OnInitializedAsync() {
+        Northwind = NorthwindContextFactory.CreateDbContext();
+        Invoices = await Northwind.Invoices.ToListAsync();
+        MasterGridData = await Northwind.Customers.ToListAsync();
+        DataLoadedTcs.TrySetResult(true);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            await DataLoadedTcs.Task; // Waits for grid data to load
+            Grid.ExpandDetailRow(0);
+        }
+    }
+    public void Dispose() {
+        Northwind?.Dispose();
+    }
+}

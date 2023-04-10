@@ -14,9 +14,9 @@ Follow the steps below to implement a layout with a nested grid:
 
 1. Add a master Grid to a page. [Bind](https://docs.devexpress.com/Blazor/403737/grid/bind-to-data) the Grid to data and populate it with [columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Columns).
 
-2. Place a detail Grid in a separate component and bind this Grid to data.
+2. Place a detail Grid in a separate component. [Bind](https://docs.devexpress.com/Blazor/403737/grid/bind-to-data) this Grid to data and populate it with [columns](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.Columns).
 
-3. Add the [DetailRowTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DetailRowTemplate) to the master Grid's markup. Place the component that displays the detail Grid in this template. Use the template's [context](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridDetailRowTemplateContext) object to filter the detail Grid's data.
+3. Add the [DetailRowTemplate](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.DetailRowTemplate) to the master Grid's markup. In the template, declare a component that displays the detail Grid. Use the template's [context](https://docs.devexpress.com/Blazor/DevExpress.Blazor.GridDetailRowTemplateContext) object to filter the detail Grid's data.
 
 4. Set the master Grid's [AutoCollapseDetailRow](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxGrid.AutoCollapseDetailRow) property to `true` to collapse the expanded detail row once a user expands another detail row.
 

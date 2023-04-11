@@ -26,7 +26,7 @@ Follow the steps below to add a detail grid to implement a nested layout:
 * [Index.razor](./CS/Pages/Index.razor)
 * [Grid_MasterDetail_NestedGrid_DetailContent.razor](./CS/Pages/Grid_MasterDetail_NestedGrid_DetailContent.razor)
 * [Program.cs](./CS/Program.cs)
-* [Customer.cs](./Models/Customer.cs)
+* [Customer.cs](./CS/Models/Customer.cs)
 * [Invoice.cs](/CS/Models/Invoice.cs)
 * [NorthwindContext.cs](./CS/Models/NorthwindContext.cs)
 
